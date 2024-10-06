@@ -1,0 +1,93 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #e6eef7;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+form {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.question {
+    margin: 20px 0;
+}
+
+.question label {
+    display: block;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.response-tabs {
+    display: flex;
+    justify-content: space-between;
+}
+
+.tab {
+    flex: 1;
+    padding: 10px;
+    margin: 0 5px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.tab:hover {
+    background-color: #0056b3;
+}
+
+.tab.active {
+    background-color: #0056b3;
+}
+
+button[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+.result {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.result p {
+    font-size: 1.2em;
+    color: #333;
+}
+
+.error-message {
+    margin-top: 20px;
+    color: red;
+    text-align: center;
+}

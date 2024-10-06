@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="icon" type="image/x-icon" href="./images/UTP-icon.png">
+    <title>UTP - Mental Wellness Check</title>
+    <style>
+        body {
+            background-color: #e6eef7;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding-top: 50px;
+        }
+        .logo img {
+            width: 300px;
+        }
+        h1 {
+            color: #003366;
+            margin-bottom: 20px;
+        }
+        .assessment {
+            background-color: #004e92;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .note {
+            color: red;
+            font-size: 0.9em;
+            margin-bottom: 20px;
+        }
+        .buttons {
+            margin: 20px 0;
+        }
+        .buttons button {
+            background-color: #004e92;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            border-radius: 25px;
+            font-size: 1.2em;
+            cursor: pointer;
+        }
+        .schedule-btn {
+            background-color: #004e92;
+            color: white;
+            border: none;
+            padding: 10px 40px;
+            border-radius: 10px;
+            font-size: 1.2em;
+            cursor: pointer;
+            display: block;
+            margin: 0 auto;
+            margin-top: 30px;
+        }
+        .footer {
+            margin-top: 40px;
+            font-size: 0.9em;
+            color: #333;
+        }
+        .footer img {
+            width: 150px;
+            margin-top: 10px;
+        }
+
+
+        .switch-container {
+        text-align: left;
+        display: inline-block;
+        position: relative;
+        width: 170px; /* Increased width by 50px */
+        height: 50px;
+    }
+
+    .switch-checkbox {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .switch-label {
+        position: relative;
+        display: block;
+        width: 100%;
+        height: 100%;
+        background-color: #916f12;; /* Default green color */
+        border-radius: 25px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }   
+
+    .switch-text {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+        color: #fff;
+        transition: opacity 0.3s ease;
+    }
+
+    .switch-text:first-child {
+        left: 20px;
+        opacity: 1; /* Show Student text by default */
+    }
+
+    .switch-text:last-child {
+        right: 20px;
+        opacity: 0; /* Hide Staff text by default */
+    }
+
+    .switch-button {
+        position: absolute;
+        top: 50%;
+        left: 5px;
+        transform: translateY(-50%);
+        width: 40px;
+        height: 40px;
+        background-color: #fff;
+        border-radius: 50%;
+        transition: transform 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .switch-icon {
+        width: 24px;
+        height: 24px;
+    }
+
+    .switch-checkbox:checked + .switch-label {
+        background-color: #004e92; /* Blue color when checked     #3A3365. #F7BF20.*/
+    }
+
+    .switch-checkbox:checked + .switch-label .switch-button {
+        transform: translate(120px, -50%); /* Adjusted for expanded width */
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <img src=".\images\UTP_logo_PNG.png" alt="UTP Logo">
+        </div>
+        <div class="assessment" style="margin-top: 10px;">
+            <b style="font-size: 24px;">UTP - Mental Wellness Check</b>
+            <br>[DASS-21 Assessment]
+        </div>
+        <div class="switch-container">
+            <input type="checkbox" id="switch" class="switch-checkbox">
+            <label class="switch-label" for="switch">
+              <span class="switch-text" id="studentText" style="padding-left: 19%;">Role: Student</span>
+              <span class="switch-text" id="staffText" style="padding-left: 21%;">Role: Staff</span>
+              <span class="switch-button">
+                <img src="./images/student-icon.png" alt="icon" class="switch-icon" id="switchIcon">
+              </span>
+            </label>
+        </div>
+
+        <div class="buttons">
+            <button id="student-btn"  onclick="toQuestion()">Start Diagnosis</button>
+        </div>
+
+        <button class="schedule-btn" onclick="Schedule()" >
+            Schedule an Appointment
+            <i class="material-icons" style="font-size:24px;">event</i>
+        </button>
+        <div class="footer">
+            <p>brought to you by:</p>
+            <img src=".\images\PCS.png" alt="PCS Logo">
+            <p>This is a Final Year Project made for UTP Psychological and Counselling Services to identify UTP students' mental health status.</p> 
+        </div>
+    </div>
+    <script>
+        role = "";
+        document.addEventListener('DOMContentLoaded', function() {
+            const switchCheckbox = document.getElementById('switch');
+            const switchIcon = document.getElementById('switchIcon');
+            const studentText = document.getElementById('studentText');
+            const staffText = document.getElementById('staffText');
+            
+            // Set the initial state
+            if (switchCheckbox.checked) {
+                switchIcon.src = './images/staff-icon.png'; // Path to the Staff icon
+                studentText.style.opacity = '0'; // Hide Student text
+                staffText.style.opacity = '1';   // Show Staff text
+                role = "staff";
+            } else {
+                switchIcon.src = './images/student-icon.png'; // Path to the Student icon
+                studentText.style.opacity = '1'; // Show Student text
+                staffText.style.opacity = '0';   // Hide Staff text
+                role = "student";
+            }
+        });
+
+        // Update the switch state on change
+        document.getElementById('switch').addEventListener('change', function() {
+            const switchIcon = document.getElementById('switchIcon');
+            const studentText = document.getElementById('studentText');
+            const staffText = document.getElementById('staffText');
+            
+            if (this.checked) {
+                switchIcon.src = './images/staff-icon.png'; // Path to the Staff icon
+                studentText.style.opacity = '0'; // Hide Student text
+                staffText.style.opacity = '1';   // Show Staff text
+                role = "staff";
+            } else {
+                switchIcon.src = './images/student-icon.png'; // Path to the Student icon
+                studentText.style.opacity = '1'; // Show Student text
+                staffText.style.opacity = '0';   // Hide Staff text
+                role = "student";
+            }
+        });
+
+        function toQuestion() {
+            location.href="./questionnaire.html?role=" + role;
+        }
+
+        function Schedule() {
+            location.replace("https://outlook.office365.com/book/CounsellingSession@utp.edu.my/?ae=true&login_hint");
+        }
+    </script>
+</body>
+</html>
+
+
+

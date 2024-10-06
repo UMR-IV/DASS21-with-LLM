@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="./images/UTP-icon.png">
+    <title>UTP - Mental Wellness Check</title>
+    <style>
+    .switch-container {
+        display: inline-block;
+        position: relative;
+        width: 190px; /* Increased width by 50px */
+        height: 50px;
+    }
+
+    .switch-checkbox {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .switch-label {
+        position: relative;
+        display: block;
+        width: 100%;
+        height: 100%;
+        background-color: #4caf50; /* Default green color */
+        border-radius: 25px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .switch-text {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+        color: #fff;
+        transition: opacity 0.3s ease;
+    }
+
+    .switch-text:first-child {
+        left: 20px;
+        opacity: 1; /* Show Student text by default */
+    }
+
+    .switch-text:last-child {
+        right: 20px;
+        opacity: 0; /* Hide Staff text by default */
+    }
+
+    .switch-button {
+        position: absolute;
+        top: 50%;
+        left: 5px;
+        transform: translateY(-50%);
+        width: 40px;
+        height: 40px;
+        background-color: #fff;
+        border-radius: 50%;
+        transition: transform 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .switch-icon {
+        width: 24px;
+        height: 24px;
+    }
+
+    .switch-checkbox:checked + .switch-label {
+        background-color: #007bff; /* Blue color when checked */
+    }
+
+    .switch-checkbox:checked + .switch-label .switch-button {
+        transform: translate(140px, -50%); /* Adjusted for expanded width */
+    }
+    </style>
+</head>
+<body>
+    <div class="switch-container">
+        <input type="checkbox" id="switch" class="switch-checkbox">
+        <label class="switch-label" for="switch">
+          <span class="switch-text" id="studentText" style="padding-left: 25%;">Student</span>
+          <span class="switch-text" id="staffText" style="padding-left: 35%;">Staff</span>
+          <span class="switch-button">
+            <img src="./images/student-icon.png" alt="icon" class="switch-icon" id="switchIcon">
+          </span>
+        </label>
+    </div>
+      
+    <script>
+        // Initialize the switch state
+        role = "";
+        document.addEventListener('DOMContentLoaded', function() {
+            const switchCheckbox = document.getElementById('switch');
+            const switchIcon = document.getElementById('switchIcon');
+            const studentText = document.getElementById('studentText');
+            const staffText = document.getElementById('staffText');
+            
+            // Set the initial state
+            if (switchCheckbox.checked) {
+                switchIcon.src = './images/staff-icon.png'; // Path to the Staff icon
+                studentText.style.opacity = '0'; // Hide Student text
+                staffText.style.opacity = '1';   // Show Staff text
+            } else {
+                switchIcon.src = './images/student-icon.png'; // Path to the Student icon
+                studentText.style.opacity = '1'; // Show Student text
+                staffText.style.opacity = '0';   // Hide Staff text
+            }
+        });
+
+        // Update the switch state on change
+        document.getElementById('switch').addEventListener('change', function() {
+            const switchIcon = document.getElementById('switchIcon');
+            const studentText = document.getElementById('studentText');
+            const staffText = document.getElementById('staffText');
+            
+            if (this.checked) {
+                switchIcon.src = './images/staff-icon.png'; // Path to the Staff icon
+                studentText.style.opacity = '0'; // Hide Student text
+                staffText.style.opacity = '1';   // Show Staff text
+                role = "staff";
+            } else {
+                switchIcon.src = './images/student-icon.png'; // Path to the Student icon
+                studentText.style.opacity = '1'; // Show Student text
+                staffText.style.opacity = '0';   // Hide Staff text
+                role = "student";
+            }
+        });
+    </script>
+</body>
+</html>
